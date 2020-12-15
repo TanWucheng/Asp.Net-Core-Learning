@@ -2,4 +2,7 @@ CoreConsoleApp/bin
 CoreConsoleApp/obj
 CoreConsoleLib/bin
 CoreConsoleLib/obj
+CoreConsoleTest/bin
+CoreConsoleTest/obj
 .vscode
+.idea

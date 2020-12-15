@@ -1,0 +1,4 @@
+.idea
+.vscode
+AspNetCoreApp/bin
+AspNetCoreApp/obj
