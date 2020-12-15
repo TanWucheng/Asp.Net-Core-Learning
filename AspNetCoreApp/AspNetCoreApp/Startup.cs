@@ -1,5 +1,9 @@
+﻿using AspNetCoreApp.Data;
+using AspNetCoreApp.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +24,10 @@ namespace AspNetCoreApp
         {
             services.AddRazorPages();
             services.AddMvc().AddRazorRuntimeCompilation();
+            services.AddDbContext<BookContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("BookContext"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,12 +45,24 @@ namespace AspNetCoreApp
                 app.UseHsts();
             }
 
+            app.UseRequestIp();
+
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=86400");
+                },
+                ServeUnknownFileTypes = true,
+                DefaultContentType = "text/plain"
+            });
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseStatusCodePages("text/plain", "状态码：{0}");
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
