@@ -4,3 +4,4 @@
 AspNetCoreApp/bin
 AspNetCoreApp/obj
 AspNetCoreApp/Migrations
+AspNetCoreApp/Database/*

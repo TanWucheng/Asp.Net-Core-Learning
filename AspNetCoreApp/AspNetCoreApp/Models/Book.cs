@@ -19,5 +19,8 @@ namespace AspNetCoreApp.Models
 
         [Display(Name = "价格")]
         public decimal Price { get; set; }
+
+        [Display(Name = "类型")]
+        public string Type { get; set; }
     }
 }

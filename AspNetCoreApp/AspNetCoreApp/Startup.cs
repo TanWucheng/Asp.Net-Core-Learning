@@ -1,4 +1,5 @@
-﻿using AspNetCoreApp.Data;
+﻿using System.Text;
+using AspNetCoreApp.Data;
 using AspNetCoreApp.Extension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,13 +27,16 @@ namespace AspNetCoreApp
             services.AddMvc().AddRazorRuntimeCompilation();
             services.AddDbContext<BookContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("BookContext"));
+                options.UseSqlite(Configuration.GetConnectionString("BookContext"));
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // 注册 Encoding.RegisterProvider,以支持 GB2312 编码
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,7 +66,13 @@ namespace AspNetCoreApp
 
             app.UseAuthorization();
 
-            app.UseStatusCodePages("text/plain", "状态码：{0}");
+            app.UseStatusCodePages(async context =>
+            {
+                context.HttpContext.Response.ContentType = "text/plain";
+                await context.HttpContext.Response.WriteAsync(
+                    "Status code page, 状态码: " +
+                    context.HttpContext.Response.StatusCode, Encoding.GetEncoding("GB2312"));
+            });
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }

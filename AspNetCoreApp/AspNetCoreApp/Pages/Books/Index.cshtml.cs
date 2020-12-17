@@ -3,23 +3,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreApp.Models;
+using AspNetCoreApp.Data;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace AspNetCoreApp.Pages.Books
 {
     public class IndexModel : PageModel
     {
-        private readonly Data.BookContext _context;
+        private readonly BookContext _context;
 
-        public IndexModel(Data.BookContext context)
+        public IndexModel(BookContext context)
         {
             _context = context;
         }
 
-        public IList<Book> Book { get;set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchKey { get; set; }
+
+        public IList<Book> Book { get; set; }
 
         public async Task OnGetAsync()
         {
-            Book = await _context.Book.ToListAsync();
+            var books = _context.Book.AsQueryable();
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                books = books.Where(x => x.Title.Contains(SearchKey));
+            }
+            Book = await books.ToListAsync();
         }
     }
 }

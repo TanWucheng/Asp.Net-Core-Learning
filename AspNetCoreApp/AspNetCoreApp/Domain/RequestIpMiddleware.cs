@@ -17,7 +17,7 @@ namespace AspNetCoreApp.Domain
 
         public async Task Invoke(HttpContext context)
         {
-            _logger.LogInformation($"User IP: {context.Connection.RemoteIpAddress}");
+            _logger.LogInformation($"客户端请求IP: {context.Connection.RemoteIpAddress}");
             await _next.Invoke(context);
         }
     }

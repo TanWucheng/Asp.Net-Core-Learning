@@ -36,8 +36,14 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Book.Price)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Book.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Type)
+        </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Book.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
