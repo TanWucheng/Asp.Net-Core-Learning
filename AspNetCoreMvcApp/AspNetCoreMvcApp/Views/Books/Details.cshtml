@@ -1,15 +1,14 @@
 ﻿@page
-@model AspNetCoreApp.Pages.Books.DeleteModel
+@model AspNetCoreMvcApp.ViewModels.BookViewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h1>删除</h1>
+<h1>Details</h1>
 
-<h3>您确定要删除掉这本书籍?</h3>
 <div>
-    <h4>书籍信息</h4>
+    <h4>Book</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -36,17 +35,9 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Book.Price)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Book.Type)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Type)
-        </dd>
     </dl>
-
-    <form method="post">
-        <input type="hidden" asp-for="Book.Id" />
-        <input type="submit" value="删除" class="btn btn-danger" /> |
-        <a asp-page="./Index">返回到读书清单</a>
-    </form>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Book.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
 </div>

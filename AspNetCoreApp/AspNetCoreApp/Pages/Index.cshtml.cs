@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreApp.Pages
@@ -7,6 +8,8 @@ namespace AspNetCoreApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        public string Message { get; private set; }
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -14,7 +17,7 @@ namespace AspNetCoreApp.Pages
 
         public void OnGet()
         {
-
+            Message = $"标准时间: {DateTime.Now}";
         }
     }
 }
