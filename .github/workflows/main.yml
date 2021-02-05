@@ -15,7 +15,7 @@ jobs:
     
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
-      run: touch ./BlazorWebAssemblyStartup/BlazorWebAssemblyStartup/bin/Release/net5.0/publish/wwwroo.nojekyll
+      run: touch ./BlazorWebAssemblyStartup/BlazorWebAssemblyStartup/bin/Release/net5.0/publish/wwwroot/.nojekyll
 
     - name: Publish app
       run: dotnet publish ./BlazorWebAssemblyStartup/BlazorWebAssemblyStartup/BlazorWebAssemblyStartup.csproj --configuration Release
