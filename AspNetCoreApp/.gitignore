@@ -1,0 +1,7 @@
+.idea
+.vscode
+.vs
+AspNetCoreApp/bin
+AspNetCoreApp/obj
+AspNetCoreApp/Migrations
+AspNetCoreApp/Database/*

@@ -1,0 +1,72 @@
+﻿@page "{SearchKey?}"
+@model AspNetCoreApp.Pages.Books.IndexModel
+
+@{
+    ViewData["Title"] = "图书馆管理";
+}
+
+<h1>图书清单</h1>
+
+<p>
+    <a asp-page="Create">新建图书</a>
+</p>
+<form class="pb-4">
+    <div class="form-row">
+        <label asp-for="SearchKey" class="col-md-1 col-form-label">标题</label>
+        <div class="col-md-3">
+            <input type="text" asp-for="SearchKey" class="form-control" />
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">查询</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].PublicationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Type)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Book)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublicationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">编辑</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">详细</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

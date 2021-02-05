@@ -42,3 +42,22 @@
 ```bash
 > dotnet build && dotnet run
 ```
+
+## 添加单元测试项目
+
+```bash
+> dotnet new xunit -n CoreConsoleTest
+```
+
+## 运行单元测试
+
+```bash
+> cd CoreConsoleTest
+> dotnet test
+```
+
+## dotnet 命令发布
+
+```bash
+> dotnet publish -r debian.10-x64
+```

@@ -5,11 +5,10 @@ namespace CoreConsoleLib
 {
     public class MyClass
     {
-        public static void MyFunc()
+        public static string MyFunc()
         {
-            Console.WriteLine($"当前系统平台:{RuntimeInformation.OSDescription}");
-            Console.WriteLine($"当前系统架构:{RuntimeInformation.OSArchitecture}");
-            Console.WriteLine($"当前日期时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            return
+                $"当前系统平台:{RuntimeInformation.OSDescription}\n当前系统架构:{RuntimeInformation.OSArchitecture}\n当前日期时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}";
         }
     }
 }
